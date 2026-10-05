@@ -1,0 +1,4 @@
+music.mp3: coloque aqui a musica 'A Miserable - Decalius' (renomeie o arquivo para music.mp3)
+psp/: modelo 3D e texturas do PSP
+panda.jpg: foto do panda
+bg.jpg: wallpaper (Hollow Knight)
