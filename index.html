@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07080a">
+  <meta name="description" content="borguesin — brg.gov">
+  <title>borguesin — PSP</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E✦%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@600;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bg"></div>
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <div class="lamp"></div>
+  <div class="grain"></div>
+  <div class="vignette"></div>
+  <div id="vstatus" hidden></div>
+  <canvas id="gl" aria-label="PSP 3D"></canvas>
+
+  <div id="vscreen">
+    <div class="screen-glow"></div>
+
+    <!-- BOOT -->
+    <div class="boot" id="boot">
+      <div class="boot-grid"></div>
+      <div class="boot-waves"></div>
+      <div class="boot-inner">
+        <div class="boot-mark">✦</div>
+        <div class="boot-title glitch" data-text="borguesin">borguesin</div>
+        <div class="boot-sub">personal system // brg.gov</div>
+        <button id="startBtn" class="start">PRESS START</button>
+        <div class="boot-hint">tap / enter</div>
+      </div>
+    </div>
+
+    <!-- HOME -->
+    <div class="home hidden" id="home">
+      <header class="profile-head">
+        <div class="mini-avatar">
+          <img src="assets/panda.jpg" alt="panda">
+        </div>
+        <div>
+          <div class="eyebrow">WELCOME BACK</div>
+          <h1>borguesin</h1>
+          <p>@borguesin</p>
+        </div>
+        <div class="head-tag">✦ y2k.sys</div>
+      </header>
+
+      <nav class="menu" aria-label="Menu principal">
+        <button class="menu-item active" data-panel="profile">✦ PROFILE</button>
+        <button class="menu-item" data-panel="social">✧ SOCIAL</button>
+        <button class="menu-item" data-panel="about">☾ ABOUT</button>
+        <button class="menu-item" data-panel="music">♫ MUSIC</button>
+      </nav>
+
+      <section class="panel active-panel" id="profile">
+        <div class="hero-card">
+          <div class="image-wrap">
+            <img src="assets/panda.jpg" alt="panda do xbox">
+            <span class="image-label">FILE_BRG-01</span>
+            <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          </div>
+          <div class="hero-copy">
+            <span class="tiny">USER PROFILE</span>
+            <h2 class="glitch" data-text="brg.gov">brg.gov</h2>
+            <p>✦ LEGENDARY ✦</p>
+            <div class="status"><span></span> online / somewhere</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="social">
+        <div class="panel-title">SOCIAL LINKS</div>
+        <a class="link-card" href="https://instagram.com/brgkk_" target="_blank" rel="noopener">
+          <span>◎</span><strong>Instagram</strong><small>@brgkk_ ↗</small>
+        </a>
+        <button class="link-card" id="discordBtn" type="button" data-user="borguesin">
+          <span>◈</span><strong>Discord</strong><small id="discordHint">borguesin ⧉</small>
+        </button>
+      </section>
+
+      <section class="panel" id="about">
+        <div class="panel-title">ABOUT</div>
+        <div class="about-box">
+          <div class="code-line"><span>01</span> loading personality...</div>
+          <div class="code-line"><span>02</span> games / internet / music</div>
+          <div class="code-line"><span>03</span> psp and fps</div>
+          <div class="code-line"><span>04</span> status: <b>online</b></div>
+        </div>
+      </section>
+
+      <section class="panel" id="music">
+        <div class="panel-title">NOW PLAYING</div>
+        <div class="music-card">
+          <div class="album">
+            <img src="assets/panda.jpg" alt="">
+            <div class="play-ring">♫</div>
+          </div>
+          <div>
+            <div class="tiny" id="trackArtist">AMBIENTE</div>
+            <h2 id="trackTitle">ambient loop</h2>
+            <p id="trackNote">som gerado no navegador</p>
+          </div>
+        </div>
+        <div class="player"><button class="play-btn" id="musicBtn" type="button">▶ PLAY</button><input id="vol" type="range" min="0" max="100" value="60" aria-label="Volume"><span class="music-note" id="musicState">música de fundo</span></div>
+      </section>
+
+      <footer class="screen-footer">
+        <span>◀ / ▶ navigate</span>
+        <span>✦ borguesin</span>
+        <span>v1.0.0</span>
+      </footer>
+    </div>
+  </div>
+
+  <nav class="pad" id="pad" aria-label="botões">
+    <button class="pill pl" data-p="l">L</button><button class="pill pr" data-p="r">R</button>
+    <div class="cl dp"><button class="u" data-p="up">▲</button><button class="l" data-p="left">◀</button><button class="r" data-p="right">▶</button><button class="d" data-p="down">▼</button></div>
+    <div class="mid"><button class="pill" data-p="select">select</button><button class="pill" data-p="start">start</button><button class="pill" data-p="ps">home</button></div>
+    <div class="cl fb"><button class="u bt" data-p="tri">△</button><button class="l bs" data-p="sq">□</button><button class="r bc" data-p="cir">○</button><button class="d bx" data-p="x">×</button></div>
+  </nav>
+
+  <aside class="guide" id="guide" aria-label="controles">
+    <h3>✦ controls ✦</h3>
+    <ul>
+      <li data-lk="up down left right"><b class="g">✛</b><span>navigate</span></li>
+      <li data-lk="x"><b class="g bx">×</b><span>open / confirm</span></li>
+      <li data-lk="cir"><b class="g bc">○</b><span>back</span></li>
+      <li data-lk="tri"><b class="g bt">△</b><span>music on / off</span></li>
+      <li data-lk="sq"><b class="g bs">□</b><span>reset view</span></li>
+      <li data-lk="l r"><b class="g">L R</b><span>switch tabs</span></li>
+      <li data-lk="start"><b class="g">start</b><span>first tab</span></li>
+      <li data-lk="select"><b class="g">select</b><span>hide this guide</span></li>
+      <li data-lk="ps"><b class="g">home</b><span>back to start</span></li>
+    </ul>
+  </aside>
+
+  <div class="ticker" aria-hidden="true"><div class="ticker-track"><span>✦ borguesin ✦ brg.gov ✦ online / somewhere ✦ psp and fps ✦ A Miserable — Decalius ✦ y2k.sys ✦ </span><span>✦ borguesin ✦ brg.gov ✦ online / somewhere ✦ psp and fps ✦ A Miserable — Decalius ✦ y2k.sys ✦ </span></div></div>
+
+  <audio id="bgm" loop preload="auto" src="assets/music.mp3"></audio>
+  <div class="drag-hint" id="dragHint">arraste o PSP para girar</div>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js" onerror="document.write('<script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js&quot;><\/script>')"></script>
+  <script src="script.js"></script>
+</body>
+</html>
